@@ -51,7 +51,7 @@ void ACPlayerCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerI
 	UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(PlayerInputComponent);
 	if (EnhancedInputComponent)
 	{
-		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Triggered, this, &ACPlayerCharacter::Jump);
+		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &ACPlayerCharacter::Jump);
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ACPlayerCharacter::LookInput);
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ACPlayerCharacter::MoveInput);
 	}
@@ -76,12 +76,10 @@ FVector ACPlayerCharacter::GetLookRightDir()
 {
 	return FollowCamera->GetRightVector();
 }
-
 FVector ACPlayerCharacter::GetLookForwardDir()
 {
 	return FollowCamera->GetForwardVector();
 }
-
 FVector ACPlayerCharacter::GetMoveFwdDir()
 {
 	return FVector::CrossProduct(GetLookRightDir(), FVector::UpVector);
