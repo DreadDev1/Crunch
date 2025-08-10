@@ -26,6 +26,12 @@ public:
 	FORCEINLINE bool IsMoving() const { return Speed != 0.f; }
 	UFUNCTION(BlueprintCallable, meta=(BlueprintThreadSafe))
 	FORCEINLINE bool IsNotMoving() const { return Speed == 0.f; }
+
+	UFUNCTION(BlueprintCallable, meta=(BlueprintThreadSafe))
+	FORCEINLINE float GetYawSpeed() const { return YawSpeed; }
+	UFUNCTION(BlueprintCallable, meta=(BlueprintThreadSafe))
+	FORCEINLINE float GetSmoothedYawSpeed() const { return SmoothedYawSpeed; }
+	
 private:
 	UPROPERTY()
 	ACharacter* OwningCharacter;
@@ -34,4 +40,10 @@ private:
 	UCharacterMovementComponent* OwningMovementComponent;
 
 	float Speed;
+	float YawSpeed;
+	float SmoothedYawSpeed;
+	UPROPERTY(EditAnywhere, Category = "Animation")
+	float YawSpeedSmoothLerpSpeed = 2.f;
+	
+	FRotator BodyPrevRot;
 };
