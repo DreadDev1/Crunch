@@ -30,10 +30,13 @@ void UCAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 		YawSpeed = BodyRotDelta.Yaw / DeltaSeconds;
 		SmoothedYawSpeed = UKismetMathLibrary::FInterpTo(SmoothedYawSpeed, YawSpeed, DeltaSeconds, YawSpeedSmoothLerpSpeed);
 
-		if (OwningMovementComponent)
-		{
-			bIsJumping = OwningMovementComponent->IsFalling();
-		}
+		FRotator ControlRot = OwningCharacter->GetBaseAimRotation();
+		LookRotOffset = UKismetMathLibrary::NormalizedDeltaRotator(ControlRot, BodyRot);
+	}
+
+	if (OwningMovementComponent)
+	{
+		bIsJumping = OwningMovementComponent->IsFalling();
 	}
 }
 

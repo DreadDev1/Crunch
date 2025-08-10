@@ -36,7 +36,11 @@ public:
 	FORCEINLINE bool GetIsJumping() const { return bIsJumping; }
 	UFUNCTION(BlueprintCallable, meta=(BlueprintThreadSafe))
 	FORCEINLINE bool GetIsOnGround() const { return !bIsJumping; }
-	
+
+	UFUNCTION(BlueprintCallable, meta=(BlueprintThreadSafe))
+	FORCEINLINE float GetLookYawOffset() const { return LookRotOffset.Yaw; }
+	UFUNCTION(BlueprintCallable, meta=(BlueprintThreadSafe))
+	FORCEINLINE float GetLookPitchOffset() const { return LookRotOffset.Pitch; }
 private:
 	UPROPERTY()
 	ACharacter* OwningCharacter;
@@ -52,6 +56,8 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Animation")
 	float YawSpeedSmoothLerpSpeed = 2.f;
 
+	FRotator LookRotOffset;
+	
 	bool bIsJumping;
 
 };
